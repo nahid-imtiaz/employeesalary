@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>All Employees</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+
+<body>
+    <div class="container my-2">
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand active" href="/">Grade Setting</a>
+                    <a class="navbar-brand" href="/createEmployeeFrom">Add Employee</a>
+                    <a class="navbar-brand" href="/bank-info">Add Bank Info</a>
+                    <a class="navbar-brand" href="/list-employees">Employee List</a>
+                    <a class="navbar-brand" href="/salary-info-list">Salary Sheet</a>
+                </div>
+
+            </div>
+
+        </nav>
+
+    <div class="card">
+    <div class="card-body">
+        <div th:switch="${employees}" class="container my-5">
+
+            <div class="col-md-10">
+                <h2 th:case="null">No record found !!</h2>
+                <div th:case="*">
+                    <table class="table table-striped table-responsive-md">
+                        <thead>
+                            <tr>
+                                <th> Name </th>
+                                <th>Address</th>
+                                <th>Mobile</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="employee : ${employees}">
+                                <td th:text="${employee.name}"></td>
+                                <td th:text="${employee.address}"></td>
+                                <td th:text="${employee.mobile}"></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</body>
+
+</html>
