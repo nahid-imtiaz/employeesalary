@@ -33,15 +33,13 @@
             <div th:switch="${employees}" class="container my-5">
 
                 <div class="col-md-10">
-                    <h2 th:case="null">No record found !!</h2>
+                    <h2 th:case="null">Disbursement Done !!</h2>
                     <div th:case="*">
                         <table class="table table-striped table-responsive-md">
                             <thead>
                             <tr>
                                 <th> Name </th>
                                 <th>Rank</th>
-                                <th>Bank Account</th>
-                                <th>Basic Salary</th>
                                 <th>Total Salary</th>
                             </tr>
                             </thead>
@@ -49,15 +47,19 @@
                             <tr th:each="employee : ${employees}">
                                 <td th:text="${employee.name}"></td>
                                 <td th:text="${employee.rank}"></td>
-                                <td th:text="${employee.bankAccountName}"></td>
-                                <td th:text="${employee.basicSalary}"></td>
                                 <td th:text="${employee.totalsalary}"></td>
 
                             </tr>
                             </tbody>
                         </table>
                     </div>
+                    <form  th:action="@{/disburse-salary}" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="submit" class="btn btn-primary" value="Disburse salary" required>
+                            </div>
 
+                        </div>
                 </div>
             </div>
         </div>

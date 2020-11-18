@@ -2,9 +2,11 @@ package com.brainstation.employeesalary.service;
 
 import com.brainstation.employeesalary.dto.EmployeeSalaryInfo;
 import com.brainstation.employeesalary.entity.BankInfo;
+import com.brainstation.employeesalary.entity.Employee;
 import com.brainstation.employeesalary.repository.BankInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,17 +18,20 @@ public class BankInfoServiceImpl implements BankInfoService {
 
     @Override
     public BankInfo createBankInfo(BankInfo entity) {
-        if (entity != null){
-            entity =bankInfoRepository.save(entity);
+        if (entity != null) {
+            entity = bankInfoRepository.save(entity);
         }
         return entity;
     }
 
-    public List<EmployeeSalaryInfo> getAllBankInfo()
-    {
+    public List<EmployeeSalaryInfo> getAllBankInfo() {
         List<BankInfo> result = (List<BankInfo>) bankInfoRepository.findAll();
+        return createEmployeeList(result);
+    }
+
+    private List<EmployeeSalaryInfo> createEmployeeList(List<BankInfo> result){
         List<EmployeeSalaryInfo> emplist = new LinkedList<>();
-        for (BankInfo bankInfo : result){
+        for (BankInfo bankInfo : result) {
 
             EmployeeSalaryInfo employeeSalaryInfo = new EmployeeSalaryInfo();
 
@@ -41,7 +46,7 @@ public class BankInfoServiceImpl implements BankInfoService {
             emplist.add(employeeSalaryInfo);
 
         }
-
-       return emplist;
+        return emplist;
     }
+
 }

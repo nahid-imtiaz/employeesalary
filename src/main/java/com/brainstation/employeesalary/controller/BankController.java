@@ -25,8 +25,7 @@ public class BankController {
 
 
     @RequestMapping(path = "/bank-info", method = RequestMethod.GET)
-    public String getBankInfoForm(Model model)
-    {   //generate employee list in dropdown.
+    public String getBankInfoForm(Model model) {   //generate employee list in dropdown.
         List<Employee> employees = (List<Employee>) employeeRepository.findAll();
         model.addAttribute("employees", employees);
 
@@ -35,27 +34,27 @@ public class BankController {
 
     @RequestMapping(path = "/createBankInfo", method = RequestMethod.POST)
     public String createBankInfo(@RequestParam(value = "account-name") String accountName,
-                                         @RequestParam(value = "account-type") String accountType,
-                                         @RequestParam(value = "account-number") String accountNumber,
-                                         @RequestParam(value = "employee") String employeeId)
-    {
+                                 @RequestParam(value = "account-type") String accountType,
+                                 @RequestParam(value = "account-number") String accountNumber,
+                                 @RequestParam(value = "employee") String employeeId,
+                                 Model model) {
         BankInfo bankInfo = new BankInfo();
         bankInfo.setAccountName(accountName);
         bankInfo.setAccountNumber(accountNumber);
         bankInfo.setAccountType(accountType);
 
         Optional<Employee> employee1 = employeeRepository.findById(Long.parseLong(employeeId));
-        if(employee1.isPresent()){
+        if (employee1.isPresent()) {
             bankInfo.setEmployee(employee1.get());
         }
 
         bankInfoService.createBankInfo(bankInfo);
-        return "redirect:/";
+        model.addAttribute("message", "Bank Information created");
+        return "add-edit-employee";
     }
 
     @RequestMapping(path = "/salary-info-list", method = RequestMethod.GET)
-    public String getAllInfo(Model model)
-    {
+    public String getAllInfo(Model model) {
         List<EmployeeSalaryInfo> list = bankInfoService.getAllBankInfo();
 
         model.addAttribute("employees", list);
