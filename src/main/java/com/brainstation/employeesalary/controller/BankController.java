@@ -28,7 +28,7 @@ public class BankController {
     public String getBankInfoForm(Model model) {   //generate employee list in dropdown.
         List<Employee> employees = (List<Employee>) employeeRepository.findAll();
         model.addAttribute("employees", employees);
-
+        System.out.println("Add this line in git haub ----");
         return "bank-info";
     }
 
